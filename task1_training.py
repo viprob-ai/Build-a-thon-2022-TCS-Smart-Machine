@@ -82,7 +82,7 @@ def main():
     
 
 
-    param = Param(observe_window=10,batch_size=32,epochs=10,feature_set = feature_set)
+    param = Param(observe_window=observe_window,batch_size=batch_size,epochs=epochs,feature_set = feature_set)
     ############################
 
     train_X,train_y = data_loader.read_raw_data(load_first_n_files=len(data_loader.dataset.files),

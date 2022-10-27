@@ -12,7 +12,7 @@
             "console": "integratedTerminal",
             "args": [
                 "--model_path", "./model_checkpoint1",
-                "--input_data", "../../data/raw/PS_1/FORCE_ESTIMATION_TRAIN_SET",
+                "--input_data", "../data/raw/PS_1/FORCE_ESTIMATION_TRAIN_SET",
                 // "--input_data", "../../data/raw/PS_2/OBJECT_DETECTION_TRAIN_SET/OBJECT_DETECTION_TRAIN_SET.csv",
 
                 

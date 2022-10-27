@@ -1,5 +1,6 @@
 
 
+from datetime import datetime
 import os
 from pathlib import Path
 from types import SimpleNamespace
@@ -10,6 +11,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import tensorboard
 import tensorflow as tf  # Version 1.0.0 (some previous versions are used in past commits)
 from keras.layers import LSTM, Dense, Dropout, Flatten
 from keras.models import Sequential
@@ -321,15 +323,16 @@ class Model(object):
         """
         f_set = '_'.join(self.model_param.feature_set)
         self.f_path = self.model_path / f_set / str(n_timesteps)
-        from keras.callbacks import ModelCheckpoint
+        from keras.callbacks import ModelCheckpoint,TensorBoard
         self.f_path.mkdir(parents=True,exist_ok=True) 
         fname = self.f_path.as_posix() + "/model-{epoch:03d}-{val_accuracy:.4f}.hdf5"
         model_checkpoint_callback = [
-                        ModelCheckpoint(filepath=fname,monitor='val_accuracy',verbose=1, save_best_only=True, mode='max')
+                        ModelCheckpoint(filepath=fname,monitor='val_accuracy',verbose=1, save_best_only=True, mode='max'),
+                        TensorBoard(log_dir=self.f_path.as_posix()+"/"+datetime.now().strftime("%Y%m%d-%H%M%S"))
                     ]
 
         
-        self.model.fit(train_X, train_y, epochs = iter_epochs, batch_size = n_batch_size,callbacks=model_checkpoint_callback,validation_split=0.3)
+        self.history = self.model.fit(train_X, train_y, epochs = iter_epochs, batch_size = n_batch_size,callbacks=model_checkpoint_callback,validation_split=0.3)
         
 
         """
@@ -338,6 +341,14 @@ class Model(object):
         _, accuracy = self.model.evaluate(test_X, test_y, batch_size=n_batch_size, verbose=0)
         rprint(Panel(f'Accuracy : {accuracy}'))
 
+    def viz(self):
+        self.model.summary()
+
+        self.plot_curves(self.history)
+        # import visualkeras
+        # visualkeras.layered_view(self.model,legend=True,draw_volume=True,to_file='./img.png')
+
+        print()
 
     def predict(self,test_X):
 
@@ -390,6 +401,49 @@ class Model(object):
 
         
         return self.model
+
+    def plot_curves(self,history):
+
+        acc = history.history['accuracy']
+        val_acc = history.history['val_accuracy']
+        loss = history.history['loss']
+        val_loss = history.history['val_loss']
+
+        epochs = range(1, len(acc) + 1)
+
+
+        font = {
+            'family' : 'Bitstream Vera Sans',
+            'weight' : 'bold',
+            'size'   : 18
+        }
+        matplotlib.rc('font', **font)
+
+        width = 12
+        height = 12
+        plt.figure(figsize=(width, height))
+
+        # indep_train_axis = np.array(range(batch_size, (len(train_losses)+1)*batch_size, batch_size))
+        plt.plot(epochs, loss,     "b--", label="Train losses")
+        plt.plot(epochs, acc, "g--", label="Train accuracies")
+
+        # indep_test_axis = np.append(
+        #     np.array(range(batch_size, len(test_losses)*display_iter, display_iter)[:-1]),
+        #     [training_iters]
+        # )
+        plt.plot(epochs, val_loss,     "b-", label="Test losses")
+        plt.plot(epochs, val_acc, "g-", label="Test accuracies")
+
+        plt.title("Training session's progress over iterations")
+        plt.legend(loc='upper right', shadow=True)
+        plt.ylabel('Training Progress (Loss or Accuracy values)')
+        plt.xlabel('Training iteration')
+        plt.show()
+
+        plt.savefig(self.f_path.as_posix()+'/history.png',bbox_inches='tight')
+
+
+
 
     def plot_cf(self,y_test,one_hot_predictions,LABELS):
 
@@ -450,6 +504,7 @@ class Train(Model):
 
         if not self.pretrain:
             self.run_model(train_X,train_y,test_X,test_y)
+            self.viz()
             self.save_model(delete_model=False)
 
         one_hot_predictions = self.predict(test_X)
