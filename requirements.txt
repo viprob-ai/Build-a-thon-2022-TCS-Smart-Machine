@@ -1,0 +1,11 @@
+joblib==1.2.0
+keras==2.10.0
+matplotlib==3.5.3
+natsort==8.2.0
+numpy==1.21.6
+pandas==1.3.5
+prettytable==3.4.1
+pyrtools==1.0.0
+rich==12.6.0
+scikit_learn
+tensorflow==2.10.0
