@@ -46,7 +46,7 @@ python task2_training.py --model_path ./model_checkpoint2 --input_data ./path/to
 ```
 - --input_data argument contains the path to the training set.
 
-### Testing
+### **`Testing`**
 
 ### **For task1 (Problem Statement I)**
 ```
