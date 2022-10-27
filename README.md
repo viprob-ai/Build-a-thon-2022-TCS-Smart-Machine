@@ -22,7 +22,8 @@ pip install -r requirements
 ### <span style='background-color:black;color:blue;'>Training</span>
 
 - Inside the root of the repo, there would be the following files (exactly as named below):
-
+    
+    ```html
     - <span style='color:blue;'>task1.py</span>, this script contains the code that reads the test set  and predicts the specified output for Task Problem Statement I: Slip Detection and Force Estimation in CSV format (one per line). The format of test set will be same as pre-evaluation dataset (i.e., the path will be the root folder containing all CSV files in the testset)
     - <span style='color:blue;'>task2.py</span>, this script contains the code that reads the test set and predicts the specified output for Task Problem Statement II: Object Detection in CSV format (one per line). A sample output is here. The format of test set will be same as pre-evaluation dataset (i.e., the path will be the complete path to ONE AND ONLY CSV file in the testset)
     - <span style='color:blue;'>requirements.txt</span>, this contains the requirements to load the dependent modules for your scripts.
@@ -30,6 +31,7 @@ pip install -r requirements
     - <span style='color:blue;'>task2_training.py</span>, this script contains the code to read a train set and train a model with the data that must be saved/dumped as ./model_checkpoint_task2
     - model_checkpoint1
     - model_checkpoint2
+    ```
 
 ### **For task1 (Problem Statement I)**
 
