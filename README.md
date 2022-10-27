@@ -33,14 +33,14 @@ pip install -r requirements
     - model_checkpoint2
     
 
-### **For task1 (Problem Statement I)**
+#### `For task1 (Problem Statement I)`
 
 ```
 python task1_training.py --model_path ./model_checkpoint1 --input_data ./path/to/trainset/directory
 ```
 - --input_data argument contains the path to the directory of the training set. `--input_data expects the path of a root directory containing multiple CSV files belonging to the training set.`
 
-### **For task2 (Problem Statement II)**
+#### `For task2 (Problem Statement II)`
 ```
 python task2_training.py --model_path ./model_checkpoint2 --input_data ./path/to/trainset.csv
 ```
@@ -48,13 +48,13 @@ python task2_training.py --model_path ./model_checkpoint2 --input_data ./path/to
 
 ### **`Testing`**
 
-### **For task1 (Problem Statement I)**
+#### `For task1 (Problem Statement I)`
 ```
 python task1.py --model_path ./model_checkpoint1 --input_data /path/to/testset/directory --output ./path/to/predictions/directory
 ```
 - --input_data argument contains the path to the directory of the hidden test set. --input_data expects the path of a root directory where multiple CSV files exist belonging to the test-set
 
-### **For task1 (Problem Statement II)**
+#### `For task1 (Problem Statement II)`
 ```
 python task2.py --model_path ./model_checkpoint2 --input_data ./path/to/testset.csv --output ./predictions_task2.csv
 ```
