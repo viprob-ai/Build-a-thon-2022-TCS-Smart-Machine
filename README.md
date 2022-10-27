@@ -11,7 +11,7 @@ pip install -r requirements
 
 ## Training and Evaluation [Reproducing the Results]
 
-### <span style='background-color:black;color:blue;'>Raw Dataset</span>
+### <span style='background-color:black;color:blue;'>**`Raw Dataset`**</span>
 
 ### Problem statement I - Slip Dtetection and Force Estimation
 - [Training Dataset Download](https://drive.google.com/file/d/1GMl2EDRemXZrdwgYTCV4mk10lXxQdHb-/view)
@@ -19,7 +19,7 @@ pip install -r requirements
 ### Problem statement II - Object Detection
 - [Training Dataset download](https://drive.google.com/file/d/19uaJjJY0-ItKJ35f_OI6Nb_A_3uAuKTc/view)
 
-### <span style='background-color:black;color:blue;'>Training</span>
+### <span style='background-color:black;color:blue;'>**`Training`**</span>
 
 - Inside the root of the repo, there would be the following files (exactly as named below):
     
